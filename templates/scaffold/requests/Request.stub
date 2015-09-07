@@ -29,7 +29,7 @@ class $MODEL_NAME$Request extends Request {
 
     public function response(array $errors)
     {
-        return response()->json('errors' => $errors, 422);
+        return response()->json(['errors' => $errors], 422);
     }
 
 }
