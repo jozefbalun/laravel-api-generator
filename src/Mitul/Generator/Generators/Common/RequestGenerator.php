@@ -15,24 +15,18 @@ class RequestGenerator implements GeneratorProvider
     /** @var string */
     private $path;
 
-    /** @var boolean generate separate requests or one */
-    private $separate_request;
-
     public function __construct($commandData)
     {
         $this->commandData = $commandData;
         $this->path = Config::get('generator.path_request', app_path('Http/Requests/'));
-        $this->separate_request = Config::get('generator.separate_request', false);
     }
 
     public function generate()
     {
-        if($separate_request) {
-            $this->generateCreateRequest();
-            $this->generateUpdateRequest();
-        } else {
-            $this->generateRequest();
-        }
+        //$this->generateCreateRequest();
+        //$this->generateUpdateRequest();
+        $this->generateRequest();
+
     }
 
     private function generateCreateRequest()
