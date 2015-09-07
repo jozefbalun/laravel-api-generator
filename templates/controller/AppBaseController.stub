@@ -1,4 +1,6 @@
-<?php namespace $NAMESPACE_CONTROLLER$;
+<?php
+
+namespace $NAMESPACE_CONTROLLER$;
 
 use $NAMESPACE_APP$\Http\Controllers\Controller as AppBaseController;
 use Illuminate\Http\Request;
@@ -18,7 +20,7 @@ class AppBaseController extends AppBaseController
     public function validateRequestOrFail($request, array $rules, $messages = [], $customAttributes = [])
     {
         $validator = $this->getValidationFactory()->make($request->all(), $rules, $messages, $customAttributes);
-	    
+
         if ($validator->fails())
         {
 	        throw new HttpException(400, $validator->errors()->getMessages());

@@ -1,13 +1,16 @@
-<?php namespace $NAMESPACE_API_CONTROLLER$;
+<?php
+
+namespace $NAMESPACE_API_CONTROLLER$;
 
 use $NAMESPACE_REQUEST$;
 use $NAMESPACE_REPOSITORY$\$MODEL_NAME$Repository;
 use App\Models\$MODEL_NAME$;
 use Illuminate\Http\Request;
+use App\Http\Request\$MODEL_NAME$Request;
 use $BASE_CONTROLLER$ as AppBaseController;
 use Response;
 
-class $MODEL_NAME$APIController extends AppBaseController
+class $MODEL_NAME$Controller extends AppBaseController
 {
 	/** @var  $MODEL_NAME$Repository */
 	private $$MODEL_NAME_CAMEL$Repository;
@@ -31,16 +34,6 @@ class $MODEL_NAME$APIController extends AppBaseController
 	}
 
 	/**
-	 * Show the form for creating a new $MODEL_NAME$.
-	 * GET|HEAD /$MODEL_NAME_PLURAL_CAMEL$/create
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-	}
-
-	/**
 	 * Store a newly created $MODEL_NAME$ in storage.
 	 * POST /$MODEL_NAME_PLURAL_CAMEL$
 	 *
@@ -48,14 +41,12 @@ class $MODEL_NAME$APIController extends AppBaseController
 	 *
 	 * @return Response
 	 */
-	public function store(Request $request)
+	public function store($MODEL_NAME$Request $request)
 	{
 		if(sizeof($MODEL_NAME$::$rules) > 0)
 			$this->validateRequestOrFail($request, $MODEL_NAME$::$rules);
 
-		$input = $request->all();
-
-		$$MODEL_NAME_PLURAL_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->create($input);
+		$$MODEL_NAME_PLURAL_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->create($request->all());
 
 		return $this->sendResponse($$MODEL_NAME_PLURAL_CAMEL$->toArray(), "$MODEL_NAME$ saved successfully");
 	}
@@ -76,20 +67,6 @@ class $MODEL_NAME$APIController extends AppBaseController
 	}
 
 	/**
-	 * Show the form for editing the specified $MODEL_NAME$.
-	 * GET|HEAD /$MODEL_NAME_PLURAL_CAMEL$/{id}/edit
-	 *
-	 * @param  int $id
-	 *
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		// maybe, you can return a template for JS
-//		Errors::throwHttpExceptionWithCode(Errors::EDITION_FORM_NOT_EXISTS, ['id' => $id], static::getHATEOAS(['%id' => $id]));
-	}
-
-	/**
 	 * Update the specified $MODEL_NAME$ in storage.
 	 * PUT/PATCH /$MODEL_NAME_PLURAL_CAMEL$/{id}
 	 *
@@ -98,14 +75,12 @@ class $MODEL_NAME$APIController extends AppBaseController
 	 *
 	 * @return Response
 	 */
-	public function update($id, Request $request)
+	public function update($id, $MODEL_NAME$Request $request)
 	{
-		$input = $request->all();
-
 		/** @var $MODEL_NAME$ $$MODEL_NAME_CAMEL$ */
 		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->apiFindOrFail($id);
 
-		$result = $this->$MODEL_NAME_CAMEL$Repository->updateRich($input, $id);
+		$result = $this->$MODEL_NAME_CAMEL$Repository->updateRich($request->all(), $id);
 
 		$$MODEL_NAME_CAMEL$ = $$MODEL_NAME_CAMEL$->fresh();
 

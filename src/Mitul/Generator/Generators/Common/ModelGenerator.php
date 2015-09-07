@@ -6,6 +6,7 @@ use Config;
 use Mitul\Generator\CommandData;
 use Mitul\Generator\Generators\GeneratorProvider;
 use Mitul\Generator\Utils\GeneratorUtils;
+use Illuminate\Support\Str;
 
 class ModelGenerator implements GeneratorProvider
 {
@@ -55,7 +56,7 @@ class ModelGenerator implements GeneratorProvider
         $fillables = [];
 
         foreach ($this->commandData->inputFields as $field) {
-            $fillables[] = '"'.$field['fieldName'].'"';
+            $fillables[] = '"'.Str::lower($field['fieldName']).'"';
         }
 
         $templateData = str_replace('$FIELDS$', implode(",\n\t\t", $fillables), $templateData);
@@ -88,21 +89,21 @@ class ModelGenerator implements GeneratorProvider
         foreach ($this->commandData->inputFields as $field) {
             switch ($field['fieldType']) {
                 case 'integer':
-                    $rule = '"'.$field['fieldName'].'" => "integer"';
+                    $rule = '"'.Str::lower($field['fieldName']).'" => "integer"';
                     break;
                 case 'double':
-                    $rule = '"'.$field['fieldName'].'" => "double"';
+                    $rule = '"'.Str::lower($field['fieldName']).'" => "double"';
                     break;
                 case 'float':
-                    $rule = '"'.$field['fieldName'].'" => "float"';
+                    $rule = '"'.Str::lower($field['fieldName']).'" => "float"';
                     break;
                 case 'boolean':
-                    $rule = '"'.$field['fieldName'].'" => "boolean"';
+                    $rule = '"'.Str::lower($field['fieldName']).'" => "boolean"';
                     break;
                 case 'string':
                 case 'char':
                 case 'text':
-                    $rule = '"'.$field['fieldName'].'" => "string"';
+                    $rule = '"'.Str::lower($field['fieldName']).'" => "string"';
                     break;
                 default:
                     $rule = '';

@@ -37,7 +37,7 @@ class RoutesGenerator implements GeneratorProvider
             $this->generateScaffoldRoutes();
         } elseif ($this->commandData->commandType == CommandData::$COMMAND_TYPE_SCAFFOLD_API) {
             $this->generateAPIRoutes();
-            $this->generateScaffoldRoutes();
+            //$this->generateScaffoldRoutes();
         }
     }
 
@@ -46,9 +46,9 @@ class RoutesGenerator implements GeneratorProvider
         $routeContents = $this->commandData->fileHelper->getFileContents($this->apiPath);
 
         if ($this->useDingo) {
-            $routeContents .= "\n\n".'$api->resource("'.$this->commandData->modelNamePluralCamel.'", "'.$this->commandData->modelName.'APIController");';
+            $routeContents .= "\n\n".'$api->resource("'.$this->commandData->modelNamePluralCamel.'", "'.$this->commandData->modelName.'Controller");';
         } else {
-            $routeContents .= "\n\n".'Route::resource("'.$this->commandData->modelNamePluralCamel.'", "'.$this->commandData->modelName.'APIController");';
+            $routeContents .= "\n\n".'Route::resource("'.$this->commandData->modelNamePluralCamel.'", "'.$this->commandData->modelName.'Controller");';
         }
 
         $this->commandData->fileHelper->writeFile($this->apiPath, $routeContents);

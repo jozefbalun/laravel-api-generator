@@ -25,7 +25,7 @@ class ScaffoldAPIGeneratorCommand extends BaseCommand
      *
      * @var string
      */
-    protected $description = 'Create a full CRUD for given model with initial views and APIs';
+    protected $description = 'Create a full CRUD for given model and APIs';
 
     /**
      * Create a new command instance.
@@ -62,11 +62,11 @@ class ScaffoldAPIGeneratorCommand extends BaseCommand
         $repoControllerGenerator = new APIControllerGenerator($this->commandData);
         $repoControllerGenerator->generate();
 
-        $viewsGenerator = new ViewGenerator($this->commandData);
+        /*$viewsGenerator = new ViewGenerator($this->commandData);
         $viewsGenerator->generate();
 
         $repoControllerGenerator = new ViewControllerGenerator($this->commandData);
-        $repoControllerGenerator->generate();
+        $repoControllerGenerator->generate();*/
 
         $routeGenerator = new RoutesGenerator($this->commandData);
         $routeGenerator->generate();

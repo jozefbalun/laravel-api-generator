@@ -1,4 +1,6 @@
-<?php namespace $NAMESPACE_CONTROLLER$;
+<?php
+
+namespace $NAMESPACE_CONTROLLER$;
 
 use $NAMESPACE_REQUEST$;
 use $NAMESPACE_REQUEST$\Create$MODEL_NAME$Request;
