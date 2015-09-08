@@ -92,6 +92,10 @@ class TableFieldsGenerator
                     $fieldInput = $this->generateSingleFieldInput($column->getName(), 'dateTime');
                     $type = 'date';
                     break;
+                case 'timestamp':
+                    $fieldInput = $this->generateSingleFieldInput($column->getName(), 'timestamp');
+                    $type = 'date';
+                    break;
                 case 'datetimetz':
                     $fieldInput = $this->generateSingleFieldInput($column->getName(), 'dateTimeTz');
                     $type = 'date';
@@ -151,17 +155,21 @@ class TableFieldsGenerator
      */
     private function generateIntFieldInput($name, $type, $column)
     {
-        $fieldInput = "$name:$type";
+        if ($name !== 'id') {
+            $fieldInput = "$name:$type";
 
-        if ($column->getAutoincrement() && $name !== 'id') {
-            $fieldInput .= ',true';
+            if ($column->getAutoincrement()) {
+                $fieldInput .= ',true';
+            }
+
+            if ($column->getUnsigned()) {
+                $fieldInput .= ',true';
+            }
+
+            return $fieldInput;
         }
 
-        if ($column->getUnsigned()) {
-            $fieldInput .= ',true';
-        }
-
-        return $fieldInput;
+        return '';
     }
 
     private function generateSingleFieldInput($name, $type)
